@@ -2936,7 +2936,8 @@ class Product extends CommonObject
 		$sql.= " ".MAIN_DB_PREFIX."product as p";
 		$sql.= " WHERE p.rowid = pa.fk_product_pere";
 		$sql.= " AND p.rowid = ".$this->id;
-
+		$sql.= " ORDER BY p.ref";
+		
 		$res = $this->db->query($sql);
 		if ($res)
 		{
@@ -2969,7 +2970,8 @@ class Product extends CommonObject
 		$sql.= " WHERE p.rowid = pa.fk_product_fils";
 		$sql.= " AND pa.fk_product_pere = ".$id;
 		$sql.= " AND pa.fk_product_fils != ".$id;	// This should not happens, it is to avoid infinite loop if it happens
-
+		$sql.= " ORDER BY p.ref";
+		
 		dol_syslog(get_class($this).'::getChildsArbo', LOG_DEBUG);
 		$res  = $this->db->query($sql);
 		if ($res)
